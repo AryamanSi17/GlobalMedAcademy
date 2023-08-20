@@ -47,12 +47,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
 app.use(checkUserLoggedIn);
-passport.use(new GoogleStrategy({
-  clientID: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET,
-  callbackURL: "https://globalmedacademy.com/auth/google/test",
-  userProfileURL: "https://www.googleapis.com/oauth2/v2/userinfo"
-},
+// passport.use(new GoogleStrategy({
+//   clientID: process.env.CLIENT_ID,
+//   clientSecret: process.env.CLIENT_SECRET,
+//   callbackURL: "https://globalmedacademy.com/auth/google/test",
+//   userProfileURL: "https://www.googleapis.com/oauth2/v2/userinfo"
+// },
   // function(accessToken, refreshToken, profile, cb) {
   //   User.findOrCreate({ googleId: profile.id }, function (err, user) {
   //     return cb(err, user);
