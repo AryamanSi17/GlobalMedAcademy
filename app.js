@@ -62,14 +62,14 @@ app.use(checkUserLoggedIn);
 
   // finorcreate logic starts
 
-  async (accessToken, refreshToken, profile, done) => {
-    try {
-      const user = await findOrCreateUser(profile);
-      return done(null, user);
-    } catch (error) {
-      return done(error, null);
-    }
-  }));
+  // async (accessToken, refreshToken, profile, done) => {
+  //   try {
+  //     const user = await findOrCreateUser(profile);
+  //     return done(null, user);
+  //   } catch (error) {
+  //     return done(error, null);
+  //   }
+  // }));
 
 async function findOrCreateUser(profile) {
   const existingUser = await User.findOne({ googleId: profile.id });
