@@ -47,29 +47,21 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
 app.use(checkUserLoggedIn);
-// passport.use(new GoogleStrategy({
-//   clientID: process.env.CLIENT_ID,
-//   clientSecret: process.env.CLIENT_SECRET,
-//   callbackURL: "https://globalmedacademy.com/auth/google/test",
-//   userProfileURL: "https://www.googleapis.com/oauth2/v2/userinfo"
-// },
-  // function(accessToken, refreshToken, profile, cb) {
-  //   User.findOrCreate({ googleId: profile.id }, function (err, user) {
-  //     return cb(err, user);
-  //   });
-  // }
-  // ));
 
-  // finorcreate logic starts
-
-  // async (accessToken, refreshToken, profile, done) => {
-  //   try {
-  //     const user = await findOrCreateUser(profile);
-  //     return done(null, user);
-  //   } catch (error) {
-  //     return done(error, null);
-  //   }
-  // }));
+passport.use(new GoogleStrategy({
+  clientID: "768289392704-eivkc190qgbss1afm45ul4g0pvk9ddjf.apps.googleusercontent.com",
+  clientSecret: "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",
+  callbackURL: "https://globalmedacademy.com/auth/google/test",
+  userProfileURL: "https://www.googleapis.com/oauth2/v2/userinfo"
+},
+  async (accessToken, refreshToken, profile, done) => {
+    try {
+      const user = await findOrCreateUser(profile);
+      return done(null, user);
+    } catch (error) {
+      return done(error, null);
+    }
+  }));
 
 async function findOrCreateUser(profile) {
   const existingUser = await User.findOne({ googleId: profile.id });
@@ -275,7 +267,7 @@ const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'info@globalmedacademy.com',
-    pass: process.env.EMAIL_PASS
+    pass: "ejdqgdnqhdmlmpxc"
   }
 });
 
@@ -318,7 +310,7 @@ const enrollUserInCourse = async (userId, courseid) => {
   const formData = new FormData();
   formData.append('moodlewsrestformat', 'json');
   formData.append('wsfunction', 'enrol_manual_enrol_users');
-  formData.append('wstoken', process.env.MOODLE_TOKEN);
+  formData.append('wstoken', "3fecec7d7227a4369b758e917800db5d");
   formData.append('enrolments[0][roleid]', 5);
   formData.append('enrolments[0][userid]', userId);
   formData.append('enrolments[0][courseid]', courseid); // Fixed variable reference
